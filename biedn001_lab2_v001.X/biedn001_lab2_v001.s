@@ -88,18 +88,18 @@ _main:
     call write_0
     call write_0
     call write_0
-    call write_1
+    call write_0
     ;green: 00
-    call write_0
-    call write_0
-    call write_0
-    call write_0
-    call write_0
-    call write_0
-    call write_0
     call write_1
-    ;blue: 80
     call write_0
+    call write_0
+    call write_0
+    call write_0
+    call write_0
+    call write_0
+    call write_0
+    ;blue: 80
+    call write_1
     call write_0
     call write_0
     call write_0
