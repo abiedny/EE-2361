@@ -60,9 +60,9 @@ xc16-ld 1.36 (A)
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xce           0x135  (309)
-.text                        0x2ce                0x7a            0xb7  (183)
+.text                        0x2ce               0x216           0x321  (801)
 
-                 Total "program" memory used (bytes):          0x1ec  (492) <1%
+                 Total "program" memory used (bytes):          0x456  (1110) 1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -87,29 +87,45 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00023c                  __psv_init
-                  0x000252                  __data_init_standard
                   0x000252                  __data_init
+                  0x000252                  __data_init_standard
                   0x0002c8                  __DefaultInterrupt
-                  0x0002ce                  _setup
-                  0x0002e6                  _main
-                  0x000320                  _delay_100_micro
-                  0x000326                  _delay_1_milli
-                  0x00032c                  _write_0
-                  0x00033a                  _write_1
+                  0x0002ce                  _Wheel
+                  0x000340                  _packColor
+                  0x000370                  _getR
+                  0x00037e                  _getG
+                  0x000392                  _getB
+                  0x00039e                  _delay
+                  0x0003b8                  _writePackedColor
+                  0x0003e8                  _writeColor
+                  0x00045e                  _setup
+                  0x000476                  _main
+                  0x0004bc                  _delay_100_micro
+                  0x0004c2                  _delay_1_milli
+                  0x0004c8                  _write_0
+                  0x0004d6                  _write_1
 
 External Symbols in Program Memory (by name):
 
+                  0x0002ce                  _Wheel
                   0x0002c8                  __DefaultInterrupt
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000320                  _delay_100_micro
-                  0x000326                  _delay_1_milli
-                  0x0002e6                  _main
-                  0x0002ce                  _setup
-                  0x00032c                  _write_0
-                  0x00033a                  _write_1
+                  0x00039e                  _delay
+                  0x0004bc                  _delay_100_micro
+                  0x0004c2                  _delay_1_milli
+                  0x000392                  _getB
+                  0x00037e                  _getG
+                  0x000370                  _getR
+                  0x000476                  _main
+                  0x000340                  _packColor
+                  0x00045e                  _setup
+                  0x0003e8                  _writeColor
+                  0x0003b8                  _writePackedColor
+                  0x0004c8                  _write_0
+                  0x0004d6                  _write_1
 
 Memory Configuration
 
@@ -182,29 +198,29 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x3b2
+.debug_info       0x000000        0x5e0
  *(.debug_info)
- .debug_info      0x000000        0x314 build/default/production/biedn001_lab2b_main_v001.o
- .debug_info      0x000314         0x9e build/default/production/biedn001_lab2b_asmLib_v001.o
+ .debug_info      0x000000        0x53a build/default/production/biedn001_lab2b_main_v001.o
+ .debug_info      0x00053a         0xa6 build/default/production/biedn001_lab2b_asmLib_v001.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000         0xf0
+.debug_abbrev     0x000000        0x136
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xdc build/default/production/biedn001_lab2b_main_v001.o
- .debug_abbrev    0x0000dc         0x14 build/default/production/biedn001_lab2b_asmLib_v001.o
+ .debug_abbrev    0x000000        0x122 build/default/production/biedn001_lab2b_main_v001.o
+ .debug_abbrev    0x000122         0x14 build/default/production/biedn001_lab2b_asmLib_v001.o
 
-.debug_line       0x000000        0x177
+.debug_line       0x000000        0x1a0
  *(.debug_line)
- .debug_line      0x000000        0x11b build/default/production/biedn001_lab2b_main_v001.o
- .debug_line      0x00011b         0x5c build/default/production/biedn001_lab2b_asmLib_v001.o
+ .debug_line      0x000000        0x144 build/default/production/biedn001_lab2b_main_v001.o
+ .debug_line      0x000144         0x5c build/default/production/biedn001_lab2b_asmLib_v001.o
 
-.debug_frame      0x000000         0x4c
+.debug_frame      0x000000        0x12c
  *(.debug_frame)
- .debug_frame     0x000000         0x4c build/default/production/biedn001_lab2b_main_v001.o
+ .debug_frame     0x000000        0x12c build/default/production/biedn001_lab2b_main_v001.o
 
-.debug_str        0x000000          0xb
+.debug_str        0x000000         0x12
  *(.debug_str)
- .debug_str       0x000000          0xb build/default/production/biedn001_lab2b_main_v001.o
+ .debug_str       0x000000         0x12 build/default/production/biedn001_lab2b_main_v001.o
 
 .debug_loc
  *(.debug_loc)
@@ -213,10 +229,10 @@ __CONFIG1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0x25
+                  0x000000         0x86
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x25 build/default/production/biedn001_lab2b_main_v001.o
+                  0x000000         0x86 build/default/production/biedn001_lab2b_main_v001.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -812,18 +828,18 @@ OUTPUT(dist/default/production/biedn001_lab2b_v001.X.production.elf elf32-pic30)
 LOAD default_isr
 
 .debug_pubtypes
-                  0x000030         0x40
+                  0x000030         0x4d
  .debug_pubtypes
-                  0x000030         0x40 build/default/production/biedn001_lab2b_main_v001.o
+                  0x000030         0x4d build/default/production/biedn001_lab2b_main_v001.o
 
 __c30_signature
-                  0x000070         0x12
+                  0x00007d         0x12
  __c30_signature
-                  0x000070          0x6 build/default/production/biedn001_lab2b_main_v001.o
+                  0x00007d          0x6 build/default/production/biedn001_lab2b_main_v001.o
  __c30_signature
-                  0x000076          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x000083          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x00007c          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000089          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
 .config_JTAGEN    0x00abfe          0x2
  .config_JTAGEN
@@ -832,12 +848,20 @@ __c30_signature
 .config_IESO      0x00abfc          0x2
  .config_IESO     0x00abfc          0x2 build/default/production/biedn001_lab2b_main_v001.o
 
-.text             0x0002ce         0x7a
- .text            0x0002ce         0x52 build/default/production/biedn001_lab2b_main_v001.o
-                  0x0002ce                  _setup
-                  0x0002e6                  _main
- .text            0x000320         0x28 build/default/production/biedn001_lab2b_asmLib_v001.o
-                  0x000320                  _delay_100_micro
-                  0x000326                  _delay_1_milli
-                  0x00032c                  _write_0
-                  0x00033a                  _write_1
+.text             0x0002ce        0x216
+ .text            0x0002ce        0x1ee build/default/production/biedn001_lab2b_main_v001.o
+                  0x0002ce                  _Wheel
+                  0x000340                  _packColor
+                  0x000370                  _getR
+                  0x00037e                  _getG
+                  0x000392                  _getB
+                  0x00039e                  _delay
+                  0x0003b8                  _writePackedColor
+                  0x0003e8                  _writeColor
+                  0x00045e                  _setup
+                  0x000476                  _main
+ .text            0x0004bc         0x28 build/default/production/biedn001_lab2b_asmLib_v001.o
+                  0x0004bc                  _delay_100_micro
+                  0x0004c2                  _delay_1_milli
+                  0x0004c8                  _write_0
+                  0x0004d6                  _write_1
