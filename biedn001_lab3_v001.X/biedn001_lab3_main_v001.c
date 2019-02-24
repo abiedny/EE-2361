@@ -39,6 +39,13 @@ const unsigned int Characters[] = {
     0b0000000111000100, //F
 };
 
+void initKeyPad(void) {
+    TRISA |= 0x000F; //ra3-ra0 input
+    TRISB &= 0x0FFF; //rb15-rb12 output
+    CNPU1 |= 0xC; //cn2-cn3
+    CNPU2 |= 0xC000; //cn29-cn30
+}
+
 void showChar7seg(char toShow, enum Digit digit) {
     LATB &= 0xF003;
     
@@ -111,6 +118,7 @@ void test(void) {
     showChar7seg('E', RIGHT);
     delay(250);
     showChar7seg('F', LEFT);
+    delay(250);
     return;
 }
 
@@ -118,13 +126,13 @@ void setup(void) {
     CLKDIVbits.RCDIV = 0;   
     AD1PCFG = 0x9fff; //sets all pins to digital I/O
     init7seg();
+    initKeyPad();
 }
 
 int main(void) {
     setup();
-    test();
     
     while(1) {
-        
+        test();
     }
 }

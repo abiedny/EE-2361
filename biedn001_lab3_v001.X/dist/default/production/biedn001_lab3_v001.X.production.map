@@ -60,9 +60,9 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xce           0x135  (309)
 .const                       0x2ce                0x20            0x30  (48)
-.text                        0x2ee               0x170           0x228  (552)
+.text                        0x2ee               0x18a           0x24f  (591)
 
-                 Total "program" memory used (bytes):          0x38d  (909) 1%
+                 Total "program" memory used (bytes):          0x3b4  (948) 1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -91,12 +91,13 @@ External Symbols in Program Memory (by address):
                   0x000252                  __data_init
                   0x0002c8                  __DefaultInterrupt
                   0x0002ce                  _Characters
-                  0x0002ee                  _showChar7seg
-                  0x00036e                  _init7seg
-                  0x000384                  _delay
-                  0x0003a0                  _test
-                  0x000442                  _setup
-                  0x000456                  _main
+                  0x0002ee                  _initKeyPad
+                  0x000302                  _showChar7seg
+                  0x000382                  _init7seg
+                  0x000398                  _delay
+                  0x0003b4                  _test
+                  0x00045a                  _setup
+                  0x000470                  _main
 
 External Symbols in Program Memory (by name):
 
@@ -106,12 +107,13 @@ External Symbols in Program Memory (by name):
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000384                  _delay
-                  0x00036e                  _init7seg
-                  0x000456                  _main
-                  0x000442                  _setup
-                  0x0002ee                  _showChar7seg
-                  0x0003a0                  _test
+                  0x000398                  _delay
+                  0x000382                  _init7seg
+                  0x0002ee                  _initKeyPad
+                  0x000470                  _main
+                  0x00045a                  _setup
+                  0x000302                  _showChar7seg
+                  0x0003b4                  _test
 
 Memory Configuration
 
@@ -183,22 +185,22 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x414
+.debug_info       0x000000        0x456
  *(.debug_info)
- .debug_info      0x000000        0x414 build/default/production/biedn001_lab3_main_v001.o
+ .debug_info      0x000000        0x456 build/default/production/biedn001_lab3_main_v001.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x164
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x164 build/default/production/biedn001_lab3_main_v001.o
 
-.debug_line       0x000000        0x13a
+.debug_line       0x000000        0x140
  *(.debug_line)
- .debug_line      0x000000        0x13a build/default/production/biedn001_lab3_main_v001.o
+ .debug_line      0x000000        0x140 build/default/production/biedn001_lab3_main_v001.o
 
-.debug_frame      0x000000         0xbc
+.debug_frame      0x000000         0xd8
  *(.debug_frame)
- .debug_frame     0x000000         0xbc build/default/production/biedn001_lab3_main_v001.o
+ .debug_frame     0x000000         0xd8 build/default/production/biedn001_lab3_main_v001.o
 
 .debug_str        0x000000         0x16
  *(.debug_str)
@@ -211,10 +213,10 @@ __CONFIG1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0x65
+                  0x000000         0x74
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x65 build/default/production/biedn001_lab3_main_v001.o
+                  0x000000         0x74 build/default/production/biedn001_lab3_main_v001.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -832,11 +834,12 @@ __c30_signature
  .const             0x82ce         0x20 build/default/production/biedn001_lab3_main_v001.o
                     0x82ce                  _Characters
 
-.text             0x0002ee        0x170
- .text            0x0002ee        0x170 build/default/production/biedn001_lab3_main_v001.o
-                  0x0002ee                  _showChar7seg
-                  0x00036e                  _init7seg
-                  0x000384                  _delay
-                  0x0003a0                  _test
-                  0x000442                  _setup
-                  0x000456                  _main
+.text             0x0002ee        0x18a
+ .text            0x0002ee        0x18a build/default/production/biedn001_lab3_main_v001.o
+                  0x0002ee                  _initKeyPad
+                  0x000302                  _showChar7seg
+                  0x000382                  _init7seg
+                  0x000398                  _delay
+                  0x0003b4                  _test
+                  0x00045a                  _setup
+                  0x000470                  _main
