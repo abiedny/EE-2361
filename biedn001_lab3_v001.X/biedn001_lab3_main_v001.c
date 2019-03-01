@@ -1,4 +1,6 @@
 #include "xc.h"
+#include "Display.h"
+#include "Keypad.h"
 
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
 #pragma config FWDTEN = OFF        // Watchdog Timer Enable (Watchdog Timer is disabled)
@@ -14,114 +16,6 @@
                                        // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
-//Which digit to display
-const enum Digit {
-    RIGHT = 0b0000100000000000,
-    LEFT = 0b0000010000000000
-};
-
-const unsigned int Characters[] = {
-    0b0000000000001100,
-    0b0000001001111100,
-    0b0000000010010100,
-    0b0000000000110100,
-    0b0000001001100100,
-    0b0000000100100100,
-    0b0000000100000100,
-    0b0000000001111100,
-    0b0000000000000100,
-    0b0000000000100100,
-    0b0000000001000100, //A
-    0b0000001100000100, //b
-    0b0000000110001100, //C
-    0b0000001000010100, //d
-    0b0000000110000100, //E
-    0b0000000111000100, //F
-};
-
-void initKeyPad(void) {
-    TRISA |= 0x000F; //ra3-ra0 input
-    TRISB &= 0x0FFF; //rb15-rb12 output
-    CNPU1 |= 0xC; //cn2-cn3
-    CNPU2 |= 0xC000; //cn29-cn30
-}
-
-void showChar7seg(char toShow, enum Digit digit) {
-    LATB &= 0xF003;
-    
-    //convert char from ascii codes to array key
-    switch (toShow) {
-        case 'b':
-        case 'd':
-            //lowercase
-            LATB |= digit | Characters[toShow - 87];
-            break;
-        case 'A':
-        case 'C':
-        case 'E':
-        case 'F':
-            //uppercase
-            LATB |= digit | Characters[toShow - 55];
-            break;
-        default:
-            //number
-            LATB |= digit | Characters[toShow - 48];
-    }
-    
-    return;
-}
-
-void init7seg(void) {
-    //rb9 - rb2 = 0
-    TRISB &= 0xF003; //RB 11:2 to output(0)
-    LATB |= 0x0FFC; //RB 9:2 to high(off)
-}
-
-void delay(unsigned int ms) {
-    int i;
-    for (i = 0; i < ms; i++) {
-        asm("repeat #15993");
-        asm("nop");
-    }
-    return;
-}
-
-void test(void) {
-    showChar7seg('0', RIGHT);
-    delay(250);
-    showChar7seg('1', LEFT);
-    delay(250);
-    showChar7seg('2', RIGHT);
-    delay(250);
-    showChar7seg('3', LEFT);
-    delay(250);
-    showChar7seg('4', RIGHT);
-    delay(250);
-    showChar7seg('5', LEFT);
-    delay(250);
-    showChar7seg('6', RIGHT);
-    delay(250);
-    showChar7seg('7', LEFT);
-    delay(250);
-    showChar7seg('8', RIGHT);
-    delay(250);
-    showChar7seg('9', LEFT);
-    delay(250);
-    showChar7seg('A', RIGHT);
-    delay(250);
-    showChar7seg('b', LEFT);
-    delay(250);
-    showChar7seg('C', RIGHT);
-    delay(250);
-    showChar7seg('d', LEFT);
-    delay(250);
-    showChar7seg('E', RIGHT);
-    delay(250);
-    showChar7seg('F', LEFT);
-    delay(250);
-    return;
-}
-
 void setup(void) {
     CLKDIVbits.RCDIV = 0;   
     AD1PCFG = 0x9fff; //sets all pins to digital I/O
@@ -133,6 +27,6 @@ int main(void) {
     setup();
     
     while(1) {
-        test();
+        readKey();
     }
 }

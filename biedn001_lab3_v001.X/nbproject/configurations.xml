@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Display.h</itemPath>
+      <itemPath>Keypad.h</itemPath>
+      <itemPath>Utility.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -13,6 +16,9 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>biedn001_lab3_main_v001.c</itemPath>
+      <itemPath>Keypad.c</itemPath>
+      <itemPath>Display.c</itemPath>
+      <itemPath>Utility.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -188,6 +194,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="memories.bootflash" value="true"/>
         <property key="memories.configurationmemory" value="true"/>
         <property key="memories.dataflash" value="true"/>
