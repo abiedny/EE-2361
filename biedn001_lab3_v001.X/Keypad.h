@@ -7,7 +7,7 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+    
     int tryCols(int rowInd);
     int readKey(void);
     void initKeyPad(void);

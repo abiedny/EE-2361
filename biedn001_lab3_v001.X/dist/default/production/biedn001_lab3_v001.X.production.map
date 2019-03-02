@@ -62,10 +62,10 @@ xc16-ld 1.36 (A)
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xce           0x135  (309)
-.const                       0x2ce                0x44            0x66  (102)
-.text                        0x312               0x25a           0x387  (903)
+.const                       0x2ce                0x54            0x7e  (126)
+.text                        0x322               0x300           0x480  (1152)
 
-                 Total "program" memory used (bytes):          0x522  (1314) 2%
+                 Total "program" memory used (bytes):          0x633  (1587) 2%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -93,15 +93,15 @@ External Symbols in Program Memory (by address):
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
                   0x0002c8                  __DefaultInterrupt
-                  0x000312                  _test
-                  0x0003c2                  _showChar7seg
-                  0x000460                  _init7seg
-                  0x000476                  _tryCols
-                  0x0004a8                  _readKey
-                  0x000510                  _initKeyPad
-                  0x000532                  _setup
-                  0x000548                  _main
-                  0x000550                  _delay
+                  0x000322                  _test
+                  0x0003d2                  _showChar7seg
+                  0x000470                  _init7seg
+                  0x000486                  _tryCols
+                  0x0004bc                  _readKey
+                  0x000530                  _initKeyPad
+                  0x000552                  _setup
+                  0x000568                  _main
+                  0x000606                  _delay
 
 External Symbols in Program Memory (by name):
 
@@ -110,15 +110,15 @@ External Symbols in Program Memory (by name):
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000550                  _delay
-                  0x000460                  _init7seg
-                  0x000510                  _initKeyPad
-                  0x000548                  _main
-                  0x0004a8                  _readKey
-                  0x000532                  _setup
-                  0x0003c2                  _showChar7seg
-                  0x000312                  _test
-                  0x000476                  _tryCols
+                  0x000606                  _delay
+                  0x000470                  _init7seg
+                  0x000530                  _initKeyPad
+                  0x000568                  _main
+                  0x0004bc                  _readKey
+                  0x000552                  _setup
+                  0x0003d2                  _showChar7seg
+                  0x000322                  _test
+                  0x000486                  _tryCols
 
 Memory Configuration
 
@@ -193,27 +193,27 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x948
+.debug_info       0x000000        0x9cb
  *(.debug_info)
- .debug_info      0x000000        0x309 build/default/production/biedn001_lab3_main_v001.o
- .debug_info      0x000309        0x2b6 build/default/production/Keypad.o
- .debug_info      0x0005bf        0x238 build/default/production/Display.o
- .debug_info      0x0007f7        0x151 build/default/production/Utility.o
+ .debug_info      0x000000        0x38c build/default/production/biedn001_lab3_main_v001.o
+ .debug_info      0x00038c        0x2b6 build/default/production/Keypad.o
+ .debug_info      0x000642        0x238 build/default/production/Display.o
+ .debug_info      0x00087a        0x151 build/default/production/Utility.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x2b6
+.debug_abbrev     0x000000        0x2d9
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x104 build/default/production/biedn001_lab3_main_v001.o
- .debug_abbrev    0x000104         0xa1 build/default/production/Keypad.o
- .debug_abbrev    0x0001a5         0xbf build/default/production/Display.o
- .debug_abbrev    0x000264         0x52 build/default/production/Utility.o
+ .debug_abbrev    0x000000        0x127 build/default/production/biedn001_lab3_main_v001.o
+ .debug_abbrev    0x000127         0xa1 build/default/production/Keypad.o
+ .debug_abbrev    0x0001c8         0xbf build/default/production/Display.o
+ .debug_abbrev    0x000287         0x52 build/default/production/Utility.o
 
-.debug_line       0x000000        0x37e
+.debug_line       0x000000        0x38f
  *(.debug_line)
- .debug_line      0x000000        0x10e build/default/production/biedn001_lab3_main_v001.o
- .debug_line      0x00010e        0x10b build/default/production/Keypad.o
- .debug_line      0x000219        0x12c build/default/production/Display.o
- .debug_line      0x000345         0x39 build/default/production/Utility.o
+ .debug_line      0x000000        0x11b build/default/production/biedn001_lab3_main_v001.o
+ .debug_line      0x00011b        0x10f build/default/production/Keypad.o
+ .debug_line      0x00022a        0x12c build/default/production/Display.o
+ .debug_line      0x000356         0x39 build/default/production/Utility.o
 
 .debug_frame      0x000000        0x14c
  *(.debug_frame)
@@ -842,30 +842,30 @@ OUTPUT(dist/default/production/biedn001_lab3_v001.X.production.elf elf32-pic30)
 LOAD default_isr
 
 .debug_pubtypes
-                  0x000060         0x9a
+                  0x000060         0xa4
  .debug_pubtypes
-                  0x000060         0x40 build/default/production/biedn001_lab3_main_v001.o
+                  0x000060         0x4a build/default/production/biedn001_lab3_main_v001.o
  .debug_pubtypes
-                  0x0000a0         0x1f build/default/production/Keypad.o
+                  0x0000aa         0x1f build/default/production/Keypad.o
  .debug_pubtypes
-                  0x0000bf         0x29 build/default/production/Display.o
+                  0x0000c9         0x29 build/default/production/Display.o
  .debug_pubtypes
-                  0x0000e8         0x12 build/default/production/Utility.o
+                  0x0000f2         0x12 build/default/production/Utility.o
 
 __c30_signature
-                  0x0000fa         0x24
+                  0x000104         0x24
  __c30_signature
-                  0x0000fa          0x6 build/default/production/biedn001_lab3_main_v001.o
+                  0x000104          0x6 build/default/production/biedn001_lab3_main_v001.o
  __c30_signature
-                  0x000100          0x6 build/default/production/Keypad.o
+                  0x00010a          0x6 build/default/production/Keypad.o
  __c30_signature
-                  0x000106          0x6 build/default/production/Display.o
+                  0x000110          0x6 build/default/production/Display.o
  __c30_signature
-                  0x00010c          0x6 build/default/production/Utility.o
+                  0x000116          0x6 build/default/production/Utility.o
  __c30_signature
-                  0x000112          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x00011c          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x000118          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000122          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
 .config_JTAGEN    0x00abfe          0x2
  .config_JTAGEN
@@ -874,21 +874,21 @@ __c30_signature
 .config_IESO      0x00abfc          0x2
  .config_IESO     0x00abfc          0x2 build/default/production/biedn001_lab3_main_v001.o
 
-.const              0x82ce         0x44 load address 0x0002ce  
- .const             0x82ce         0x22 build/default/production/biedn001_lab3_main_v001.o
- .const             0x82f0         0x22 build/default/production/Display.o
+.const              0x82ce         0x54 load address 0x0002ce  
+ .const             0x82ce         0x32 build/default/production/biedn001_lab3_main_v001.o
+ .const             0x8300         0x22 build/default/production/Display.o
 
-.text             0x000312        0x25a
- .text            0x000312        0x164 build/default/production/Display.o
-                  0x000312                  _test
-                  0x0003c2                  _showChar7seg
-                  0x000460                  _init7seg
- .text            0x000476         0xbc build/default/production/Keypad.o
-                  0x000476                  _tryCols
-                  0x0004a8                  _readKey
-                  0x000510                  _initKeyPad
- .text            0x000532         0x1e build/default/production/biedn001_lab3_main_v001.o
-                  0x000532                  _setup
-                  0x000548                  _main
- .text            0x000550         0x1c build/default/production/Utility.o
-                  0x000550                  _delay
+.text             0x000322        0x300
+ .text            0x000322        0x164 build/default/production/Display.o
+                  0x000322                  _test
+                  0x0003d2                  _showChar7seg
+                  0x000470                  _init7seg
+ .text            0x000486         0xcc build/default/production/Keypad.o
+                  0x000486                  _tryCols
+                  0x0004bc                  _readKey
+                  0x000530                  _initKeyPad
+ .text            0x000552         0xb4 build/default/production/biedn001_lab3_main_v001.o
+                  0x000552                  _setup
+                  0x000568                  _main
+ .text            0x000606         0x1c build/default/production/Utility.o
+                  0x000606                  _delay

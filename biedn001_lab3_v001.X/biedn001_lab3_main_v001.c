@@ -25,8 +25,24 @@ void setup(void) {
 
 int main(void) {
     setup();
+    char Translation[4][4] = {
+        {'*', '7', '4', '1'},
+        {'0', '8', '5', '2'},
+        {'#', '9', '6', '3'},
+        {'d', 'C', 'b', 'A'}
+    };
     
+    int lastKey = -1;
     while(1) {
-        readKey();
+        int key = readKey();
+        if (key >= 0) { //either -1 or coordinates in form xy (packed integer)
+            //display the key
+            showChar7seg(Translation[(key / 10) % 10][key % 10], RIGHT);
+            if (lastKey >= 0) {
+                showChar7seg(Translation[(lastKey / 10) % 10][lastKey % 10], LEFT);
+            }
+            lastKey = key;
+        }
+        delay(40);
     }
 }
