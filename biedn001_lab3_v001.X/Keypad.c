@@ -33,9 +33,9 @@ int readKey(void) {
         LATB &= mask;
         result = tryCols(i);
         
+        delay(40);
         if (result != lastState) {
             //if there's a hit, wait 40ms and read again
-            delay(40);
             result = tryCols(i);
             if (result >= 0) {
                 LATB &= 0x0FFF;

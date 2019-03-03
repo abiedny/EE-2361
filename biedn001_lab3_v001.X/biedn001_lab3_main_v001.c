@@ -32,17 +32,23 @@ int main(void) {
         {'d', 'C', 'b', 'A'}
     };
     
+    char leftChar;
+    char rightChar;
     int lastKey = -1;
     while(1) {
         int key = readKey();
         if (key >= 0) { //either -1 or coordinates in form xy (packed integer)
             //display the key
-            showChar7seg(Translation[(key / 10) % 10][key % 10], RIGHT);
+            rightChar = Translation[(key / 10) % 10][key % 10];
             if (lastKey >= 0) {
-                showChar7seg(Translation[(lastKey / 10) % 10][lastKey % 10], LEFT);
+                leftChar = Translation[(lastKey / 10) % 10][lastKey % 10];
             }
             lastKey = key;
         }
-        delay(40);
+        
+        //segfaults incoming
+        showChar7seg(rightChar, RIGHT);
+        delay(50);
+        showChar7seg(leftChar, LEFT);
     }
 }
