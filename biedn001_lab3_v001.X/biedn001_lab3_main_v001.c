@@ -21,34 +21,47 @@ void setup(void) {
     AD1PCFG = 0x9fff; //sets all pins to digital I/O
     init7seg();
     initKeyPad();
+    
+    T1CON = 0;
+    PR1 = 15999;
+    TMR1 = 0;
+    IFS0bits.T1IF = 0; //alternatively, _T1IF = 0;
+    T1CONbits.TON = 1; // alternatively, T1CON = 0x8000;
 }
 
 int main(void) {
     setup();
     char Translation[4][4] = {
-        {'*', '7', '4', '1'},
+        {'E', '7', '4', '1'},
         {'0', '8', '5', '2'},
-        {'#', '9', '6', '3'},
+        {'F', '9', '6', '3'},
         {'d', 'C', 'b', 'A'}
     };
     
-    char leftChar;
-    char rightChar;
+    char leftChar = '\0';
+    char rightChar = '\0';
     int lastKey = -1;
     while(1) {
         int key = readKey();
         if (key >= 0) { //either -1 or coordinates in form xy (packed integer)
+            if (key != lastKey) {
+            
             //display the key
             rightChar = Translation[(key / 10) % 10][key % 10];
             if (lastKey >= 0) {
                 leftChar = Translation[(lastKey / 10) % 10][lastKey % 10];
             }
             lastKey = key;
+            }
         }
         
-        //segfaults incoming
-        showChar7seg(rightChar, RIGHT);
-        delay(50);
-        showChar7seg(leftChar, LEFT);
+        if (rightChar != '\0') {
+            showChar7seg(rightChar, RIGHT);
+            delay(5);
+        }
+        if (leftChar != '\0') {
+            showChar7seg(leftChar, LEFT);
+            delay(5);
+        }
     }
 }

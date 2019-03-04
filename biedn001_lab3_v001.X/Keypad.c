@@ -23,9 +23,7 @@ int readKey(void) {
     unsigned int mask = 0x7FFF;
     int i;
     int result;
-    int lastState = -1;
-    
-    delay(1);
+    static int lastState = -1;
     
     //bottom to top
     for(i = 0; i < 4; i++) {
@@ -33,9 +31,7 @@ int readKey(void) {
         LATB &= mask;
         result = tryCols(i);
         
-        delay(40);
         if (result != lastState) {
-            //if there's a hit, wait 40ms and read again
             result = tryCols(i);
             if (result >= 0) {
                 LATB &= 0x0FFF;
@@ -46,6 +42,11 @@ int readKey(void) {
         lastState = result;
         mask = (mask >> 1);
         mask += 0x8000;
+        
+        /*if (possibleRow != -1) {
+            LATB &= 0x0FFF;
+            break;
+        }*/
     }
     return -1;
 }
