@@ -1,6 +1,4 @@
 #include "xc.h"
-#include "Display.h"
-#include "Keypad.h"
 
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
 #pragma config FWDTEN = OFF        // Watchdog Timer Enable (Watchdog Timer is disabled)
@@ -16,52 +14,57 @@
                                        // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
-void setup(void) {
-    CLKDIVbits.RCDIV = 0;   
-    AD1PCFG = 0x9fff; //sets all pins to digital I/O
-    init7seg();
-    initKeyPad();
+void delay(unsigned int ms) {
+    int i;
+    for (i = 0; i < ms; i++) {
+        asm("repeat #15993");
+        asm("nop");
+    }
+    return;
+}
+
+void setServo(int val) {
+    OC1RS = val;
+}
+
+void initServo(void) {
+    //timer 3 to 20ms delay
+    T3CON = 0;
+    PR3 = 40000;
+    TMR3 = 0;
+    IFS0bits.T3IF = 0;
+    T3CONbits.TCKPS0 = 1;
+    T3CONbits.TCKPS1 = 0; //pre-scaler of 1:8
     
-    T1CON = 0;
-    PR1 = 15999;
-    TMR1 = 0;
-    IFS0bits.T1IF = 0; //alternatively, _T1IF = 0;
-    T1CONbits.TON = 1; // alternatively, T1CON = 0x8000;
+    T3CONbits.TON = 1; //Let's go!
+    
+    __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
+    RPOR3bits.RP6R = 18;  // Use Pin RP6 for Output Compare 1 = "18" (Table 10-3)
+    __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
+    OC1CON = 0;
+    OC1R = 1234;
+    OC1RS = 1234;
+    OC1CONbits.OCM = 0b110;
+    OC1CONbits.OCTSEL = 1;
+}
+
+void setup(void) {
+    CLKDIVbits.RCDIV = 0; //clock setup thing
+    AD1PCFG = 0x9fff; //sets all pins to digital I/O
+    TRISBbits.TRISB6 = 0; //servo pin output
+    TRISBbits.TRISB8 = 1; //button pin input;
+    
+    initServo();
 }
 
 int main(void) {
     setup();
-    char Translation[4][4] = {
-        {'E', '7', '4', '1'},
-        {'0', '8', '5', '2'},
-        {'F', '9', '6', '3'},
-        {'d', 'C', 'b', 'A'}
-    };
     
-    char leftChar = '\0';
-    char rightChar = '\0';
-    int lastKey = -1;
     while(1) {
-        int key = readKey();
-        if (key >= 0) { //either -1 or coordinates in form xy (packed integer)
-            if (key != lastKey) {
-            
-                //display the key
-                rightChar = Translation[(key / 10) % 10][key % 10];
-                if (lastKey >= 0) {
-                    leftChar = Translation[(lastKey / 10) % 10][lastKey % 10];
-                }
-                lastKey = key;
-                }
-        }
-        
-        if (rightChar != '\0') {
-            showChar7seg(rightChar, RIGHT);
-            delay(5);
-        }
-        if (leftChar != '\0') {
-            showChar7seg(leftChar, LEFT);
-            delay(5);
-        }
+        setServo(10000); //25%
+        delay(2000);
+        setServo(30000); //75%;
+        delay(2000);
     }
+    return 0;
 }
