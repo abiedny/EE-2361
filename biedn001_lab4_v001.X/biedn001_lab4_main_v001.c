@@ -14,6 +14,13 @@
                                        // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
+volatile unsigned int overflow = 0;
+
+void __attribute__((interrupt, auto_psv)) _T2Interrupt(void) {
+    overflow++;
+    _T2IF = 0;
+}
+
 void delay(unsigned int ms) {
     int i;
     for (i = 0; i < ms; i++) {
@@ -23,8 +30,8 @@ void delay(unsigned int ms) {
     return;
 }
 
-void setServo(int val) {
-    OC1RS = val;
+void setServo(double dutyMS) {
+    OC1RS = (dutyMS/20)*PR3;
 }
 
 void initServo(void) {
@@ -48,6 +55,20 @@ void initServo(void) {
     OC1CONbits.OCTSEL = 1;
 }
 
+void initPushButton(void) {
+    //timer 2 to to 1 second
+    T2CON = 0;
+    PR2 = 62500;
+    TMR2 = 0;
+    IFS0bits.T2IF = 0;
+    IEC0bits.T2IE = 1; //enable t2 interrupt
+    IPC1bits.T2IP = 3; //interrupt priority
+    T2CONbits.TCKPS = 0b11;
+    T2CONbits.TON = 1;
+    
+    CNPU2bits.CN22PUE = 1; //Pull up on RB8 (button input))
+}
+
 void setup(void) {
     CLKDIVbits.RCDIV = 0; //clock setup thing
     AD1PCFG = 0x9fff; //sets all pins to digital I/O
@@ -55,16 +76,54 @@ void setup(void) {
     TRISBbits.TRISB8 = 1; //button pin input;
     
     initServo();
+    initPushButton();
 }
 
 int main(void) {
     setup();
+    setServo(5);
+    delay(2000);
+    setServo(15);
+    delay(2000);
+    setServo(1.2);
     
+    //We're using a PULLUP RESISTOR. UP. UP!
+    short int currentState = 1;
+    short int previousState = 1;
+    unsigned long int servoState = 0;
+    unsigned long int lastPressTime = 0;
+    unsigned long int currentPressTime = 0;
+    unsigned long int time = 0;
     while(1) {
-        setServo(10000); //25%
-        delay(2000);
-        setServo(30000); //75%;
-        delay(2000);
+        time = (unsigned long int)((unsigned long int)TMR2 + (unsigned long int)overflow*PR2);
+        //look for button press
+        previousState = currentState;
+        currentState = PORTBbits.RB8;
+        
+        //if there's a press
+        if (!currentState && previousState) {
+            lastPressTime = currentPressTime;
+            currentPressTime = time;
+            
+            //check for rapid click
+            if ((currentPressTime - lastPressTime) <= 15625) {
+                //go left
+                servoState = currentPressTime;
+                setServo(1.8); //up and down like a plus
+            }
+        }
+        /*else if ((unsigned long int)((TMR2 + overflow*PR2) - currentPressTime) > (unsigned long int)15625*32) {
+            setServo(1.8);
+        }*/
+        if (servoState > 0) {
+            //servo is on, close it after 2 seconds
+            if ((time - servoState) > 125000) {
+                setServo(1.2);
+                servoState = 0;
+            }
+        }
+        
+        delay(2);
     }
     return 0;
 }
