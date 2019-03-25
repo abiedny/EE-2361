@@ -14,20 +14,42 @@
                                        // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
-volatile unsigned int overflow = 0;
+void setServo(double);
 
+volatile unsigned long int buffer[2] = { 200000, 200000 };
+volatile int bufferCount = 0;
+void bufferInsert(unsigned long int inVal) {
+    buffer[bufferCount] = inVal;
+    bufferCount = (bufferCount + 1) % 2;
+    return;
+}
+unsigned long int bufferRead(void) {
+    unsigned long int retVal = buffer[(bufferCount + 1) %2];
+    return retVal;
+}
+
+volatile unsigned int overflow = 0;
 void __attribute__((interrupt, auto_psv)) _T2Interrupt(void) {
     overflow++;
     _T2IF = 0;
 }
 
-void delay(unsigned int ms) {
-    int i;
-    for (i = 0; i < ms; i++) {
-        asm("repeat #15993");
-        asm("nop");
+volatile unsigned long int curPeriod = 0;
+void __attribute__((interrupt, auto_psv)) _IC1Interrupt(void) {
+    unsigned long int curEdge;
+    
+    _IC1IF = 0;
+    
+    curEdge = IC1BUF + overflow*PR1;
+    if (curEdge > 125) {
+        //real click
+        TMR2 = 0; //also reset tmr2
+        overflow = 0;
+        
+        curPeriod = curEdge;
+        
+        bufferInsert(curPeriod);
     }
-    return;
 }
 
 void setServo(double dutyMS) {
@@ -56,17 +78,33 @@ void initServo(void) {
 }
 
 void initPushButton(void) {
-    //timer 2 to to 1 second
+    //The IC1 module
+    //should be set up and configured to use Timer 2 and capture falling edges.
+    
     T2CON = 0;
-    PR2 = 62500;
+    PR2 = 0xffff;
     TMR2 = 0;
     IFS0bits.T2IF = 0;
     IEC0bits.T2IE = 1; //enable t2 interrupt
     IPC1bits.T2IP = 3; //interrupt priority
     T2CONbits.TCKPS = 0b11;
-    T2CONbits.TON = 1;
     
     CNPU2bits.CN22PUE = 1; //Pull up on RB8 (button input))
+    
+    __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
+    RPINR7bits.IC1R = 8;  // IC1 on RP8
+    __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
+    
+    IC1CON = 0;
+    IC1CONbits.ICTMR = 1; //timer 2 for ic1
+    IEC0bits.IC1IE = 1; //enable ic1 interrupt
+    IC1CONbits.ICM = 0b010; //falling edge capture also turn on
+    IC1CONbits.ICI = 0b00; //interrupt every capture
+    IPC0bits.IC1IP = 3; //interrupt prio
+    _IC1IF = 0;
+    _T2IF = 0;
+    
+    T2CONbits.TON = 1; //timer 2 enabled
 }
 
 void setup(void) {
@@ -81,49 +119,28 @@ void setup(void) {
 
 int main(void) {
     setup();
-    setServo(5);
-    delay(2000);
-    setServo(15);
-    delay(2000);
     setServo(1.2);
     
-    //We're using a PULLUP RESISTOR. UP. UP!
-    short int currentState = 1;
-    short int previousState = 1;
-    unsigned long int servoState = 0;
-    unsigned long int lastPressTime = 0;
-    unsigned long int currentPressTime = 0;
     unsigned long int time = 0;
+    unsigned short int state = 0;
+    unsigned long int lastPeriod = 0;
     while(1) {
+        //so time is the time since the last timer reset, therefore time since last button press
         time = (unsigned long int)((unsigned long int)TMR2 + (unsigned long int)overflow*PR2);
-        //look for button press
-        previousState = currentState;
-        currentState = PORTBbits.RB8;
+        lastPeriod = bufferRead();
         
-        //if there's a press
-        if (!currentState && previousState) {
-            lastPressTime = currentPressTime;
-            currentPressTime = time;
-            
-            //check for rapid click
-            if ((currentPressTime - lastPressTime) <= 15625) {
-                //go left
-                servoState = currentPressTime;
-                setServo(1.8); //up and down like a plus
-            }
+        if (state && (time > (unsigned long int)125000)) {
+            //reset after 2 seconds
+            setServo(1.2);
+            state = 0;
+            bufferInsert(200000); //any value above double click threshold
         }
-        /*else if ((unsigned long int)((TMR2 + overflow*PR2) - currentPressTime) > (unsigned long int)15625*32) {
+        
+        if (!state && (lastPeriod < 15625)) {
+            //double click
             setServo(1.8);
-        }*/
-        if (servoState > 0) {
-            //servo is on, close it after 2 seconds
-            if ((time - servoState) > 125000) {
-                setServo(1.2);
-                servoState = 0;
-            }
+            state = 1;
         }
-        
-        delay(2);
     }
     return 0;
 }
