@@ -76,21 +76,21 @@ xc16-ld 1.36 (A)
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x362           0x513  (1299)
-.text                        0x562               0x1fe           0x2fd  (765)
-.dinit                       0x760                0x14            0x1e  (30)
+.text                        0x200               0x376           0x531  (1329)
+.text                        0x576               0x1d6           0x2c1  (705)
+.dinit                       0x74c                0x12            0x1b  (27)
 
-                 Total "program" memory used (bytes):          0x82e  (2094) 3%
+                 Total "program" memory used (bytes):          0x80d  (2061) 3%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.ndata                       0x800                   0             0x8  (8)
-.nbss                        0x808                   0             0x8  (8)
+.nbss                        0x800                   0             0x8  (8)
+.ndata                       0x808                   0             0x4  (4)
 
-                 Total "data" memory used (bytes):           0x10  (16) <1%
+                 Total "data" memory used (bytes):            0xc  (12) <1%
 
 
 Dynamic Memory Usage
@@ -98,24 +98,24 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x810                              0x1ff0  (8176)
+stack                        0x80c                              0x1ff4  (8180)
 
-                 Maximum dynamic memory (bytes):         0x1ff0  (8176)
+                 Maximum dynamic memory (bytes):         0x1ff4  (8180)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _buffer
-                    0x0808                  _bufferCount
-                    0x080a                  _overflow
-                    0x080c                  _curPeriod
+                    0x0800                  _bufferCount
+                    0x0802                  _overflow
+                    0x0804                  _curPeriod
+                    0x0808                  _buffer
 
 External Symbols in Data Memory (by name):
 
-                    0x0800                  _buffer
-                    0x0808                  _bufferCount
-                    0x080c                  _curPeriod
-                    0x080a                  _overflow
+                    0x0808                  _buffer
+                    0x0800                  _bufferCount
+                    0x0804                  _curPeriod
+                    0x0802                  _overflow
 
 External Symbols in Program Memory (by address):
 
@@ -125,53 +125,53 @@ External Symbols in Program Memory (by address):
                   0x000252                  __data_init
                   0x0002c8                  __T2Interrupt
                   0x0002e2                  __IC1Interrupt
-                  0x000332                  __DefaultInterrupt
-                  0x000338                  ___divsf3
-                  0x0003bc                  ___fixunssfsi
-                  0x0003f2                  ___floatunsisf
-                  0x0003f6                  __fpack
-                  0x000442                  __funpack
-                  0x00046c                  __funpack2
-                  0x00047c                  __fPropagateNaN
-                  0x00048e                  __fbopExit
-                  0x000496                  __fbopReturnNaN
-                  0x00049c                  ___mulsf3
-                  0x000504                  ___floatundisf
-                  0x000562                  _bufferInsert
-                  0x00058c                  _bufferRead
-                  0x0005b2                  _setServo
-                  0x0005da                  _initServo
-                  0x000634                  _initPushButton
-                  0x0006b4                  _setup
-                  0x0006ce                  _main
+                  0x000346                  __DefaultInterrupt
+                  0x00034c                  ___divsf3
+                  0x0003d0                  ___fixunssfsi
+                  0x000406                  ___floatunsisf
+                  0x00040a                  __fpack
+                  0x000456                  __funpack
+                  0x000480                  __funpack2
+                  0x000490                  __fPropagateNaN
+                  0x0004a2                  __fbopExit
+                  0x0004aa                  __fbopReturnNaN
+                  0x0004b0                  ___mulsf3
+                  0x000518                  ___floatundisf
+                  0x000576                  _bufferInsert
+                  0x00058e                  _bufferRead
+                  0x00059e                  _setServo
+                  0x0005c6                  _initServo
+                  0x000620                  _initPushButton
+                  0x00069e                  _setup
+                  0x0006b8                  _main
 
 External Symbols in Program Memory (by name):
 
-                  0x000332                  __DefaultInterrupt
+                  0x000346                  __DefaultInterrupt
                   0x0002e2                  __IC1Interrupt
                   0x0002c8                  __T2Interrupt
-                  0x000338                  ___divsf3
-                  0x0003bc                  ___fixunssfsi
-                  0x000504                  ___floatundisf
-                  0x0003f2                  ___floatunsisf
-                  0x00049c                  ___mulsf3
+                  0x00034c                  ___divsf3
+                  0x0003d0                  ___fixunssfsi
+                  0x000518                  ___floatundisf
+                  0x000406                  ___floatunsisf
+                  0x0004b0                  ___mulsf3
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
-                  0x00047c                  __fPropagateNaN
-                  0x00048e                  __fbopExit
-                  0x000496                  __fbopReturnNaN
-                  0x0003f6                  __fpack
-                  0x000442                  __funpack
-                  0x00046c                  __funpack2
+                  0x000490                  __fPropagateNaN
+                  0x0004a2                  __fbopExit
+                  0x0004aa                  __fbopReturnNaN
+                  0x00040a                  __fpack
+                  0x000456                  __funpack
+                  0x000480                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000562                  _bufferInsert
-                  0x00058c                  _bufferRead
-                  0x000634                  _initPushButton
-                  0x0005da                  _initServo
-                  0x0006ce                  _main
-                  0x0005b2                  _setServo
-                  0x0006b4                  _setup
+                  0x000576                  _bufferInsert
+                  0x00058e                  _bufferRead
+                  0x000620                  _initPushButton
+                  0x0005c6                  _initServo
+                  0x0006b8                  _main
+                  0x00059e                  _setServo
+                  0x00069e                  _setup
 
 Memory Configuration
 
@@ -208,7 +208,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x362
+.text             0x000200        0x376
  *(.init)
  .init            0x000200         0x4c c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
                   0x000200                  __resetPRI
@@ -220,48 +220,48 @@ LOAD c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libfx-elf.a
  *(.user_init)
  *(.handle)
  *(.isr*)
- .isr.text        0x0002c8         0x6a build/default/production/biedn001_lab4_main_v001.o
+ .isr.text        0x0002c8         0x7e build/default/production/biedn001_lab4_main_v001.o
                   0x0002c8                  __T2Interrupt
                   0x0002e2                  __IC1Interrupt
- .isr             0x000332          0x4 default_isr
-                  0x000332                  __DefaultInterrupt
+ .isr             0x000346          0x4 default_isr
+                  0x000346                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x000336          0x2 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
-                  0x000336                  __crt_start_mode
-                  0x000336                  __crt_start_mode_normal
- .libm.divfs3     0x000338         0x84 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(divsf3.eo)
-                  0x000338                  ___divsf3
+                  0x00034a          0x2 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
+                  0x00034a                  __crt_start_mode
+                  0x00034a                  __crt_start_mode_normal
+ .libm.divfs3     0x00034c         0x84 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+                  0x00034c                  ___divsf3
  .libm.fixunssfsi
-                  0x0003bc         0x36 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
-                  0x0003bc                  ___fixunssfsi
+                  0x0003d0         0x36 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x0003d0                  ___fixunssfsi
  .libm.floatunsisf
-                  0x0003f2          0x4 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
-                  0x0003f2                  ___floatunsisf
- .libm.fpack      0x0003f6         0x4c c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fpack.eo)
-                  0x0003f6                  __fpack
- .libm.funpack    0x000442         0x2a c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack.eo)
-                  0x000442                  __funpack
+                  0x000406          0x4 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000406                  ___floatunsisf
+ .libm.fpack      0x00040a         0x4c c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x00040a                  __fpack
+ .libm.funpack    0x000456         0x2a c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x000456                  __funpack
  .libm.funpack2
-                  0x00046c         0x10 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack2.eo)
-                  0x00046c                  __funpack2
+                  0x000480         0x10 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x000480                  __funpack2
  .libm.fPropagateNaN
-                  0x00047c         0x12 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x00047c                  __fPropagateNaN
+                  0x000490         0x12 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000490                  __fPropagateNaN
  .libm.fbobExit
-                  0x00048e          0x8 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x00048e                  __fbopExit
+                  0x0004a2          0x8 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x0004a2                  __fbopExit
  .libm.fbopReturnNaN
-                  0x000496          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x000496                  __fbopReturnNaN
- .libm.mulsf3     0x00049c         0x68 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
-                  0x00049c                  ___mulsf3
+                  0x0004aa          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x0004aa                  __fbopReturnNaN
+ .libm.mulsf3     0x0004b0         0x68 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x0004b0                  ___mulsf3
  .libm.floatundisf
-                  0x000504         0x5e c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
-                  0x000504                  ___floatundisf
+                  0x000518         0x5e c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x000518                  ___floatundisf
 
 usercode
  *(usercode)
@@ -284,13 +284,13 @@ __CONFIG1
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x18d build/default/production/biedn001_lab4_main_v001.o
 
-.debug_line       0x000000        0x170
+.debug_line       0x000000        0x173
  *(.debug_line)
- .debug_line      0x000000        0x170 build/default/production/biedn001_lab4_main_v001.o
+ .debug_line      0x000000        0x173 build/default/production/biedn001_lab4_main_v001.o
 
-.debug_frame      0x000000        0x152
+.debug_frame      0x000000        0x15c
  *(.debug_frame)
- .debug_frame     0x000000        0x152 build/default/production/biedn001_lab4_main_v001.o
+ .debug_frame     0x000000        0x15c build/default/production/biedn001_lab4_main_v001.o
 
 .debug_str        0x000000         0xa1
  *(.debug_str)
@@ -932,15 +932,15 @@ __c30_signature
  __c30_signature
                   0x00020c          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
 
-.ndata              0x0800          0x8
- .ndata             0x0800          0x8 build/default/production/biedn001_lab4_main_v001.o
-                    0x0800                  _buffer
+.nbss               0x0800          0x8
+ .nbss              0x0800          0x8 build/default/production/biedn001_lab4_main_v001.o
+                    0x0800                  _bufferCount
+                    0x0802                  _overflow
+                    0x0804                  _curPeriod
 
-.nbss               0x0808          0x8
- .nbss              0x0808          0x8 build/default/production/biedn001_lab4_main_v001.o
-                    0x0808                  _bufferCount
-                    0x080a                  _overflow
-                    0x080c                  _curPeriod
+.ndata              0x0808          0x4
+ .ndata             0x0808          0x4 build/default/production/biedn001_lab4_main_v001.o
+                    0x0808                  _buffer
 
 .config_JTAGEN    0x00abfe          0x2
  .config_JTAGEN
@@ -959,15 +959,15 @@ __c30_signature
  .ivt._IC1Interrupt
                   0x000016          0x2 build/default/production/biedn001_lab4_main_v001.o
 
-.text             0x000562        0x1fe
- .text            0x000562        0x1fe build/default/production/biedn001_lab4_main_v001.o
-                  0x000562                  _bufferInsert
-                  0x00058c                  _bufferRead
-                  0x0005b2                  _setServo
-                  0x0005da                  _initServo
-                  0x000634                  _initPushButton
-                  0x0006b4                  _setup
-                  0x0006ce                  _main
+.text             0x000576        0x1d6
+ .text            0x000576        0x1d6 build/default/production/biedn001_lab4_main_v001.o
+                  0x000576                  _bufferInsert
+                  0x00058e                  _bufferRead
+                  0x00059e                  _setServo
+                  0x0005c6                  _initServo
+                  0x000620                  _initPushButton
+                  0x00069e                  _setup
+                  0x0006b8                  _main
 
-.dinit            0x000760         0x14
- .dinit           0x000760         0x14 data_init
+.dinit            0x00074c         0x12
+ .dinit           0x00074c         0x12 data_init

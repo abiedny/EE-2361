@@ -16,15 +16,15 @@
 
 void setServo(double);
 
-volatile unsigned long int buffer[2] = { 200000, 200000 };
+volatile unsigned long int buffer[1] = { 200000 };
 volatile int bufferCount = 0;
 void bufferInsert(unsigned long int inVal) {
     buffer[bufferCount] = inVal;
-    bufferCount = (bufferCount + 1) % 2;
+    bufferCount = (bufferCount + 1) % 1;
     return;
 }
 unsigned long int bufferRead(void) {
-    unsigned long int retVal = buffer[(bufferCount + 1) %2];
+    unsigned long int retVal = buffer[(bufferCount + 1) % 1];
     return retVal;
 }
 
@@ -40,13 +40,13 @@ void __attribute__((interrupt, auto_psv)) _IC1Interrupt(void) {
     
     _IC1IF = 0;
     
-    curEdge = IC1BUF + overflow*PR1;
+    curEdge =(unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*PR1);
     if (curEdge > 125) {
         //real click
         TMR2 = 0; //also reset tmr2
         overflow = 0;
         
-        curPeriod = curEdge;
+        curPeriod = (unsigned long int)curEdge;
         
         bufferInsert(curPeriod);
     }
@@ -127,19 +127,18 @@ int main(void) {
     while(1) {
         //so time is the time since the last timer reset, therefore time since last button press
         time = (unsigned long int)((unsigned long int)TMR2 + (unsigned long int)overflow*PR2);
-        lastPeriod = bufferRead();
+        lastPeriod = (unsigned long int)bufferRead();
         
         if (state && (time > (unsigned long int)125000)) {
             //reset after 2 seconds
             setServo(1.2);
             state = 0;
-            bufferInsert(200000); //any value above double click threshold
         }
-        
-        if (!state && (lastPeriod < 15625)) {
+        else if (!state && (lastPeriod < 15625)) {
             //double click
             setServo(1.8);
             state = 1;
+            bufferInsert(200000);
         }
     }
     return 0;
