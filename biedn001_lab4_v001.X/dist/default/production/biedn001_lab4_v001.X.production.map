@@ -77,20 +77,20 @@ xc16-ld 1.36 (A)
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x376           0x531  (1329)
-.text                        0x576               0x1d6           0x2c1  (705)
-.dinit                       0x74c                0x12            0x1b  (27)
+.text                        0x576               0x24e           0x375  (885)
+.dinit                       0x7c4                0x14            0x1e  (30)
 
-                 Total "program" memory used (bytes):          0x80d  (2061) 3%
+                 Total "program" memory used (bytes):          0x8c4  (2244) 3%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0x8  (8)
-.ndata                       0x808                   0             0x4  (4)
+.ndata                       0x800                   0             0x8  (8)
+.nbss                        0x808                   0             0x8  (8)
 
-                 Total "data" memory used (bytes):            0xc  (12) <1%
+                 Total "data" memory used (bytes):           0x10  (16) <1%
 
 
 Dynamic Memory Usage
@@ -98,24 +98,24 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x80c                              0x1ff4  (8180)
+stack                        0x810                              0x1ff0  (8176)
 
-                 Maximum dynamic memory (bytes):         0x1ff4  (8180)
+                 Maximum dynamic memory (bytes):         0x1ff0  (8176)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _bufferCount
-                    0x0802                  _overflow
-                    0x0804                  _curPeriod
-                    0x0808                  _buffer
+                    0x0800                  _buffer
+                    0x0808                  _bufferCount
+                    0x080a                  _overflow
+                    0x080c                  _curPeriod
 
 External Symbols in Data Memory (by name):
 
-                    0x0808                  _buffer
-                    0x0800                  _bufferCount
-                    0x0804                  _curPeriod
-                    0x0802                  _overflow
+                    0x0800                  _buffer
+                    0x0808                  _bufferCount
+                    0x080c                  _curPeriod
+                    0x080a                  _overflow
 
 External Symbols in Program Memory (by address):
 
@@ -138,12 +138,12 @@ External Symbols in Program Memory (by address):
                   0x0004b0                  ___mulsf3
                   0x000518                  ___floatundisf
                   0x000576                  _bufferInsert
-                  0x00058e                  _bufferRead
-                  0x00059e                  _setServo
-                  0x0005c6                  _initServo
-                  0x000620                  _initPushButton
-                  0x00069e                  _setup
-                  0x0006b8                  _main
+                  0x0005b2                  _bufferRead
+                  0x0005c2                  _setServo
+                  0x0005ea                  _initServo
+                  0x000644                  _initPushButton
+                  0x0006c4                  _setup
+                  0x0006de                  _main
 
 External Symbols in Program Memory (by name):
 
@@ -166,12 +166,12 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x000576                  _bufferInsert
-                  0x00058e                  _bufferRead
-                  0x000620                  _initPushButton
-                  0x0005c6                  _initServo
-                  0x0006b8                  _main
-                  0x00059e                  _setServo
-                  0x00069e                  _setup
+                  0x0005b2                  _bufferRead
+                  0x000644                  _initPushButton
+                  0x0005ea                  _initServo
+                  0x0006de                  _main
+                  0x0005c2                  _setServo
+                  0x0006c4                  _setup
 
 Memory Configuration
 
@@ -275,18 +275,18 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x161a
+.debug_info       0x000000       0x161d
  *(.debug_info)
- .debug_info      0x000000       0x161a build/default/production/biedn001_lab4_main_v001.o
+ .debug_info      0x000000       0x161d build/default/production/biedn001_lab4_main_v001.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x18d
+.debug_abbrev     0x000000        0x1a4
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x18d build/default/production/biedn001_lab4_main_v001.o
+ .debug_abbrev    0x000000        0x1a4 build/default/production/biedn001_lab4_main_v001.o
 
-.debug_line       0x000000        0x173
+.debug_line       0x000000        0x17c
  *(.debug_line)
- .debug_line      0x000000        0x173 build/default/production/biedn001_lab4_main_v001.o
+ .debug_line      0x000000        0x17c build/default/production/biedn001_lab4_main_v001.o
 
 .debug_frame      0x000000        0x15c
  *(.debug_frame)
@@ -932,15 +932,15 @@ __c30_signature
  __c30_signature
                   0x00020c          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
 
-.nbss               0x0800          0x8
- .nbss              0x0800          0x8 build/default/production/biedn001_lab4_main_v001.o
-                    0x0800                  _bufferCount
-                    0x0802                  _overflow
-                    0x0804                  _curPeriod
+.ndata              0x0800          0x8
+ .ndata             0x0800          0x8 build/default/production/biedn001_lab4_main_v001.o
+                    0x0800                  _buffer
 
-.ndata              0x0808          0x4
- .ndata             0x0808          0x4 build/default/production/biedn001_lab4_main_v001.o
-                    0x0808                  _buffer
+.nbss               0x0808          0x8
+ .nbss              0x0808          0x8 build/default/production/biedn001_lab4_main_v001.o
+                    0x0808                  _bufferCount
+                    0x080a                  _overflow
+                    0x080c                  _curPeriod
 
 .config_JTAGEN    0x00abfe          0x2
  .config_JTAGEN
@@ -959,15 +959,15 @@ __c30_signature
  .ivt._IC1Interrupt
                   0x000016          0x2 build/default/production/biedn001_lab4_main_v001.o
 
-.text             0x000576        0x1d6
- .text            0x000576        0x1d6 build/default/production/biedn001_lab4_main_v001.o
+.text             0x000576        0x24e
+ .text            0x000576        0x24e build/default/production/biedn001_lab4_main_v001.o
                   0x000576                  _bufferInsert
-                  0x00058e                  _bufferRead
-                  0x00059e                  _setServo
-                  0x0005c6                  _initServo
-                  0x000620                  _initPushButton
-                  0x00069e                  _setup
-                  0x0006b8                  _main
+                  0x0005b2                  _bufferRead
+                  0x0005c2                  _setServo
+                  0x0005ea                  _initServo
+                  0x000644                  _initPushButton
+                  0x0006c4                  _setup
+                  0x0006de                  _main
 
-.dinit            0x00074c         0x12
- .dinit           0x00074c         0x12 data_init
+.dinit            0x0007c4         0x14
+ .dinit           0x0007c4         0x14 data_init

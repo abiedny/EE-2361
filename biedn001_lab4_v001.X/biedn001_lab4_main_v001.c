@@ -16,16 +16,15 @@
 
 void setServo(double);
 
-volatile unsigned long int buffer[1] = { 200000 };
+volatile unsigned long int buffer[2] = { 200000, 200000 };
 volatile int bufferCount = 0;
 void bufferInsert(unsigned long int inVal) {
-    buffer[bufferCount] = inVal;
-    bufferCount = (bufferCount + 1) % 1;
+    buffer[(bufferCount + 1) % 2] = inVal;
+    bufferCount = (bufferCount + 1) % 2;
     return;
 }
 unsigned long int bufferRead(void) {
-    unsigned long int retVal = buffer[(bufferCount + 1) % 1];
-    return retVal;
+    return buffer[bufferCount];
 }
 
 volatile unsigned int overflow = 0;
@@ -43,8 +42,8 @@ void __attribute__((interrupt, auto_psv)) _IC1Interrupt(void) {
     curEdge =(unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*PR1);
     if (curEdge > 125) {
         //real click
-        TMR2 = 0; //also reset tmr2
         overflow = 0;
+        TMR2 = 0; //also reset tmr2
         
         curPeriod = (unsigned long int)curEdge;
         
@@ -124,20 +123,25 @@ int main(void) {
     unsigned long int time = 0;
     unsigned short int state = 0;
     unsigned long int lastPeriod = 0;
+    unsigned long int lastLastPeriod = 0;
     while(1) {
         //so time is the time since the last timer reset, therefore time since last button press
         time = (unsigned long int)((unsigned long int)TMR2 + (unsigned long int)overflow*PR2);
-        lastPeriod = (unsigned long int)bufferRead();
+        lastPeriod = (unsigned long int)buffer[bufferCount];
+        lastLastPeriod = (unsigned long int)buffer[(bufferCount + 1) % 2];
         
         if (state && (time > (unsigned long int)125000)) {
             //reset after 2 seconds
             setServo(1.2);
             state = 0;
+            bufferInsert(200000);
+            bufferInsert(200000);
         }
-        else if (!state && (lastPeriod < 15625)) {
+        else if (!state && (lastPeriod <= 15625) && (lastLastPeriod <= 15625)) {
             //double click
             setServo(1.8);
             state = 1;
+            bufferInsert(200000);
             bufferInsert(200000);
         }
     }
