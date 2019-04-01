@@ -17,6 +17,7 @@ Command:
   -Lc:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../support/dsPIC33F/gld \
   build/default/production/biedn001_lab4_main_v001.o \
+  build/default/production/Servo.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FJ64GA002.gld.00 \
   --stack=16 \
@@ -51,11 +52,11 @@ c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
                               (__crt_start_mode_normal)
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(divsf3.eo)
-                              build/default/production/biedn001_lab4_main_v001.o (___divsf3)
+                              build/default/production/Servo.o (___divsf3)
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
-                              build/default/production/biedn001_lab4_main_v001.o (___fixunssfsi)
+                              build/default/production/Servo.o (___fixunssfsi)
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
-                              build/default/production/biedn001_lab4_main_v001.o (___floatunsisf)
+                              build/default/production/Servo.o (___floatunsisf)
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fpack.eo)
                               c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(divsf3.eo) (__fpack)
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack.eo)
@@ -65,7 +66,7 @@ c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(futil.eo)
                               c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(divsf3.eo) (__fPropagateNaN)
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
-                              build/default/production/biedn001_lab4_main_v001.o (___mulsf3)
+                              build/default/production/Servo.o (___mulsf3)
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
                               c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo) (___floatundisf)
 
@@ -134,11 +135,11 @@ External Symbols in Program Memory (by address):
                   0x0004c2                  __fbopReturnNaN
                   0x0004c8                  ___mulsf3
                   0x000530                  ___floatundisf
-                  0x00058e                  _setServo
-                  0x0005b6                  _initServo
-                  0x000610                  _initPushButton
-                  0x00068e                  _setup
-                  0x0006a8                  _main
+                  0x00058e                  _initPushButton
+                  0x00060c                  _setup
+                  0x000626                  _main
+                  0x00067a                  _setServo
+                  0x0006a2                  _initServo
 
 External Symbols in Program Memory (by name):
 
@@ -160,11 +161,11 @@ External Symbols in Program Memory (by name):
                   0x000498                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000610                  _initPushButton
-                  0x0005b6                  _initServo
-                  0x0006a8                  _main
-                  0x00058e                  _setServo
-                  0x00068e                  _setup
+                  0x00058e                  _initPushButton
+                  0x0006a2                  _initServo
+                  0x000626                  _main
+                  0x00067a                  _setServo
+                  0x00060c                  _setup
 
 Memory Configuration
 
@@ -182,6 +183,7 @@ CONFIG1          0x00abfe           0x000002
 Linker script and memory map
 
 LOAD build/default/production/biedn001_lab4_main_v001.o
+LOAD build/default/production/Servo.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
 LOAD c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libfx-elf.a
@@ -268,26 +270,31 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x1539
+.debug_info       0x000000       0x17cd
  *(.debug_info)
- .debug_info      0x000000       0x1539 build/default/production/biedn001_lab4_main_v001.o
+ .debug_info      0x000000       0x10bd build/default/production/biedn001_lab4_main_v001.o
+ .debug_info      0x0010bd        0x710 build/default/production/Servo.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x17b
+.debug_abbrev     0x000000        0x28c
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x17b build/default/production/biedn001_lab4_main_v001.o
+ .debug_abbrev    0x000000        0x16c build/default/production/biedn001_lab4_main_v001.o
+ .debug_abbrev    0x00016c        0x120 build/default/production/Servo.o
 
-.debug_line       0x000000        0x160
+.debug_line       0x000000        0x244
  *(.debug_line)
- .debug_line      0x000000        0x160 build/default/production/biedn001_lab4_main_v001.o
+ .debug_line      0x000000        0x149 build/default/production/biedn001_lab4_main_v001.o
+ .debug_line      0x000149         0xfb build/default/production/Servo.o
 
-.debug_frame      0x000000        0x124
+.debug_frame      0x000000        0x138
  *(.debug_frame)
- .debug_frame     0x000000        0x124 build/default/production/biedn001_lab4_main_v001.o
+ .debug_frame     0x000000         0xe6 build/default/production/biedn001_lab4_main_v001.o
+ .debug_frame     0x0000e6         0x52 build/default/production/Servo.o
 
-.debug_str        0x000000         0x95
+.debug_str        0x000000         0x9e
  *(.debug_str)
- .debug_str       0x000000         0x95 build/default/production/biedn001_lab4_main_v001.o
+ .debug_str       0x000000         0x76 build/default/production/biedn001_lab4_main_v001.o
+ .debug_str       0x000076         0x28 build/default/production/Servo.o
 
 .debug_loc
  *(.debug_loc)
@@ -296,18 +303,22 @@ __CONFIG1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0x9b
+                  0x000000         0xad
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x9b build/default/production/biedn001_lab4_main_v001.o
+                  0x000000         0x80 build/default/production/biedn001_lab4_main_v001.o
+ .debug_pubnames
+                  0x000080         0x2d build/default/production/Servo.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x18
+.debug_aranges    0x000000         0x30
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/biedn001_lab4_main_v001.o
+ .debug_aranges
+                  0x000018         0x18 build/default/production/Servo.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -894,36 +905,40 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000018        0x1b2
+                  0x000030        0x1ee
  .debug_pubtypes
-                  0x000018        0x1b2 build/default/production/biedn001_lab4_main_v001.o
+                  0x000030        0x153 build/default/production/biedn001_lab4_main_v001.o
+ .debug_pubtypes
+                  0x000183         0x9b build/default/production/Servo.o
 
 __c30_signature
-                  0x0001ca         0x48
+                  0x00021e         0x4e
  __c30_signature
-                  0x0001ca          0x6 build/default/production/biedn001_lab4_main_v001.o
+                  0x00021e          0x6 build/default/production/biedn001_lab4_main_v001.o
  __c30_signature
-                  0x0001d0          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x000224          0x6 build/default/production/Servo.o
  __c30_signature
-                  0x0001d6          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x00022a          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x0001dc          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+                  0x000230          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x0001e2          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x000236          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(divsf3.eo)
  __c30_signature
-                  0x0001e8          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x00023c          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
  __c30_signature
-                  0x0001ee          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x000242          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
  __c30_signature
-                  0x0001f4          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x000248          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fpack.eo)
  __c30_signature
-                  0x0001fa          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x00024e          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack.eo)
  __c30_signature
-                  0x000200          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000254          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack2.eo)
  __c30_signature
-                  0x000206          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x00025a          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(futil.eo)
  __c30_signature
-                  0x00020c          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x000260          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+ __c30_signature
+                  0x000266          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
 
 .nbss               0x0800          0x8
  .nbss              0x0800          0x8 build/default/production/biedn001_lab4_main_v001.o
@@ -949,12 +964,13 @@ __c30_signature
                   0x000016          0x2 build/default/production/biedn001_lab4_main_v001.o
 
 .text             0x00058e        0x16e
- .text            0x00058e        0x16e build/default/production/biedn001_lab4_main_v001.o
-                  0x00058e                  _setServo
-                  0x0005b6                  _initServo
-                  0x000610                  _initPushButton
-                  0x00068e                  _setup
-                  0x0006a8                  _main
+ .text            0x00058e         0xec build/default/production/biedn001_lab4_main_v001.o
+                  0x00058e                  _initPushButton
+                  0x00060c                  _setup
+                  0x000626                  _main
+ .text            0x00067a         0x82 build/default/production/Servo.o
+                  0x00067a                  _setServo
+                  0x0006a2                  _initServo
 
 .dinit            0x0006fc          0x8
  .dinit           0x0006fc          0x8 data_init

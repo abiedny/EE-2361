@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=biedn001_lab4_main_v001.c
+SOURCEFILES_QUOTED_IF_SPACED=biedn001_lab4_main_v001.c Servo.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/biedn001_lab4_main_v001.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/biedn001_lab4_main_v001.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/biedn001_lab4_main_v001.o ${OBJECTDIR}/Servo.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/biedn001_lab4_main_v001.o.d ${OBJECTDIR}/Servo.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/biedn001_lab4_main_v001.o
+OBJECTFILES=${OBJECTDIR}/biedn001_lab4_main_v001.o ${OBJECTDIR}/Servo.o
 
 # Source Files
-SOURCEFILES=biedn001_lab4_main_v001.c
+SOURCEFILES=biedn001_lab4_main_v001.c Servo.c
 
 
 CFLAGS=
@@ -101,6 +101,13 @@ ${OBJECTDIR}/biedn001_lab4_main_v001.o: biedn001_lab4_main_v001.c  nbproject/Mak
 	${MP_CC} $(MP_EXTRA_CC_PRE)  biedn001_lab4_main_v001.c  -o ${OBJECTDIR}/biedn001_lab4_main_v001.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/biedn001_lab4_main_v001.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/biedn001_lab4_main_v001.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/Servo.o: Servo.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Servo.o.d 
+	@${RM} ${OBJECTDIR}/Servo.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Servo.c  -o ${OBJECTDIR}/Servo.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Servo.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/Servo.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/biedn001_lab4_main_v001.o: biedn001_lab4_main_v001.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -108,6 +115,13 @@ ${OBJECTDIR}/biedn001_lab4_main_v001.o: biedn001_lab4_main_v001.c  nbproject/Mak
 	@${RM} ${OBJECTDIR}/biedn001_lab4_main_v001.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  biedn001_lab4_main_v001.c  -o ${OBJECTDIR}/biedn001_lab4_main_v001.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/biedn001_lab4_main_v001.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/biedn001_lab4_main_v001.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/Servo.o: Servo.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Servo.o.d 
+	@${RM} ${OBJECTDIR}/Servo.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Servo.c  -o ${OBJECTDIR}/Servo.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Servo.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/Servo.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 
