@@ -10,7 +10,12 @@ extern "C" {
 const static char CONTRAST = 0b100000;
 const static enum ControlBits {
     RSONE = 0b01000000,
-    RSZERO = 0b00000000
+    RSZERO = 0b00000000,
+    ALLONE = 0b11000000
+};
+const static enum Direction {
+    LEFT = 0b00011000,
+    RIGHT = 0b00011100
 };
 
 void delay(unsigned int);
@@ -18,6 +23,9 @@ void lcd_printChar(char);
 void lcd_setCursor(char, char);
 void lcd_cmd(char, enum ControlBits);
 void lcd_init(void);
+void lcd_printStr(const char *s);
+void lcd_cntrl(enum ControlBits, char);
+void lcd_shiftScreen(enum Direction);
 
 #ifdef	__cplusplus
 }

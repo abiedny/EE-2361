@@ -10,6 +10,34 @@ void delay(unsigned int ms) {
     return;
 }
 
+void lcd_printStr(const char *s) {
+    I2C2CONbits.SEN = 1;
+    while(I2C2CONbits.SEN);
+    IFS3bits.MI2C2IF=0;
+    
+    I2C2TRN= 0b01111100;
+    while(!IFS3bits.MI2C2IF);
+    IFS3bits.MI2C2IF=0;
+    
+    I2C2TRN = ALLONE;
+    while(!IFS3bits.MI2C2IF);
+    IFS3bits.MI2C2IF=0;
+    
+    I2C2TRN = *s;
+    while(!IFS3bits.MI2C2IF);
+    IFS3bits.MI2C2IF=0;
+    
+    s++;
+    while (*s != '\0') {
+        lcd_cntrl(ALLONE, *s);
+        s++;
+    }
+    
+    //stop bit
+    I2C2CONbits.PEN = 1;
+    while(I2C2CONbits.PEN);
+}
+
 void lcd_printChar(char toPrint) {
     lcd_cmd(toPrint, RSONE);
 }
@@ -18,21 +46,39 @@ void lcd_setCursor(char x, char y) {
     lcd_cmd(((0x40*x)+y) + 0b10000000, RSZERO);
 }
 
+void lcd_shiftScreen(enum Direction dir) {
+    lcd_cmd(dir, RSZERO);
+}
+
 void lcd_cmd(char command, enum ControlBits cntrl) {
     I2C2CONbits.SEN = 1;
     while(I2C2CONbits.SEN);
     IFS3bits.MI2C2IF=0;
+    
     I2C2TRN= 0b01111100;
     while(!IFS3bits.MI2C2IF);
     IFS3bits.MI2C2IF=0;
+    
     I2C2TRN = cntrl;
     while(!IFS3bits.MI2C2IF);
     IFS3bits.MI2C2IF=0;
+    
     I2C2TRN = command;
     while(!IFS3bits.MI2C2IF);
     IFS3bits.MI2C2IF=0;
+    
     I2C2CONbits.PEN = 1;
     while(I2C2CONbits.PEN);
+}
+
+void lcd_cntrl(enum ControlBits cntrl, char data) {
+    I2C2TRN = cntrl;
+    while(!IFS3bits.MI2C2IF);
+    IFS3bits.MI2C2IF=0;
+    
+    I2C2TRN = data;
+    while(!IFS3bits.MI2C2IF);
+    IFS3bits.MI2C2IF=0;
 }
 
 void lcd_init(void) {
