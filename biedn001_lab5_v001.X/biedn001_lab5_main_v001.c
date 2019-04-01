@@ -17,17 +17,24 @@
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
 void setup(void) {
+    CLKDIVbits.RCDIV = 0;
+    AD1PCFG = 0x9fff; //all digital inputs and outputs
     //init i2c2
     I2C2CONbits.I2CEN = 0;
     I2C2BRG = 0x9D; //set baud generator to Fscl of 100kHz
     I2C2CONbits.I2CEN = 1; //enable
+    _I2CSIDL = 0;
     _MI2C2IF = 0; //clear interrupt
+    
+    lcd_init();
 }
 
 int main(void) {
     setup();
     
+    lcd_setCursor(1,4);
+    lcd_printChar('A');
+    
     while(1) {
-        
     }
 }

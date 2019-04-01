@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-const static char CONTRAST = 0b110011;
+const static char CONTRAST = 0b100000;
 const static enum ControlBits {
     RSONE = 0b01000000,
     RSZERO = 0b00000000
