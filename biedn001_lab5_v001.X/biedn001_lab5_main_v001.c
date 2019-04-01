@@ -33,8 +33,9 @@ int main(void) {
     setup();
     
     lcd_setCursor(1,4);
-    lcd_printChar('A');
+    lcd_printChar('Y');
     
     while(1) {
+        
     }
 }

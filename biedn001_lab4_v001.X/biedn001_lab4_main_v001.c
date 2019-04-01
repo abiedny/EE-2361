@@ -15,17 +15,7 @@
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
 void setServo(double);
-
-volatile unsigned long int buffer[2] = { 200000, 200000 };
-volatile int bufferCount = 0;
-void bufferInsert(unsigned long int inVal) {
-    buffer[(bufferCount + 1) % 2] = inVal;
-    bufferCount = (bufferCount + 1) % 2;
-    return;
-}
-unsigned long int bufferRead(void) {
-    return buffer[bufferCount];
-}
+unsigned volatile short int state = 0;
 
 volatile unsigned int overflow = 0;
 void __attribute__((interrupt, auto_psv)) _T2Interrupt(void) {
@@ -39,15 +29,18 @@ void __attribute__((interrupt, auto_psv)) _IC1Interrupt(void) {
     
     _IC1IF = 0;
     
-    curEdge =(unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*PR1);
-    if (curEdge > 125) {
+    curEdge = (unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*PR2);
+    if (curEdge > 500) {
         //real click
-        overflow = 0;
         TMR2 = 0; //also reset tmr2
+        overflow = 0;
+        curPeriod = curEdge;
         
-        curPeriod = (unsigned long int)curEdge;
-        
-        bufferInsert(curPeriod);
+        if (!state && (curPeriod < 15625)) {
+            //double click
+            state = 1;
+            setServo(1.8);
+        }
     }
 }
 
@@ -99,7 +92,7 @@ void initPushButton(void) {
     IEC0bits.IC1IE = 1; //enable ic1 interrupt
     IC1CONbits.ICM = 0b010; //falling edge capture also turn on
     IC1CONbits.ICI = 0b00; //interrupt every capture
-    IPC0bits.IC1IP = 3; //interrupt prio
+    IPC0bits.IC1IP = 4; //interrupt prio
     _IC1IF = 0;
     _T2IF = 0;
     
@@ -121,28 +114,14 @@ int main(void) {
     setServo(1.2);
     
     unsigned long int time = 0;
-    unsigned short int state = 0;
-    unsigned long int lastPeriod = 0;
-    unsigned long int lastLastPeriod = 0;
     while(1) {
         //so time is the time since the last timer reset, therefore time since last button press
         time = (unsigned long int)((unsigned long int)TMR2 + (unsigned long int)overflow*PR2);
-        lastPeriod = (unsigned long int)buffer[bufferCount];
-        lastLastPeriod = (unsigned long int)buffer[(bufferCount + 1) % 2];
         
         if (state && (time > (unsigned long int)125000)) {
             //reset after 2 seconds
-            setServo(1.2);
             state = 0;
-            bufferInsert(200000);
-            bufferInsert(200000);
-        }
-        else if (!state && (lastPeriod <= 15625) && (lastLastPeriod <= 15625)) {
-            //double click
-            setServo(1.8);
-            state = 1;
-            bufferInsert(200000);
-            bufferInsert(200000);
+            setServo(1.2);
         }
     }
     return 0;

@@ -13,6 +13,7 @@ const static enum ControlBits {
     RSZERO = 0b00000000
 };
 
+void delay(unsigned int);
 void lcd_printChar(char);
 void lcd_setCursor(char, char);
 void lcd_cmd(char, enum ControlBits);
