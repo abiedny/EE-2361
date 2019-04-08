@@ -60,10 +60,10 @@ xc16-ld 1.36 (A)
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xce           0x135  (309)
-.const                       0x2ce                 0xa             0xf  (15)
-.text                        0x2d8               0x246           0x369  (873)
+.const                       0x2ce                 0xe            0x15  (21)
+.text                        0x2dc               0x208           0x30c  (780)
 
-                 Total "program" memory used (bytes):          0x4ad  (1197) 1%
+                 Total "program" memory used (bytes):          0x456  (1110) 1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -91,16 +91,16 @@ External Symbols in Program Memory (by address):
                   0x000252                  __data_init_standard
                   0x000252                  __data_init
                   0x0002c8                  __DefaultInterrupt
-                  0x0002d8                  _delay
-                  0x0002f4                  _lcd_printStr
-                  0x000362                  _lcd_printChar
-                  0x000370                  _lcd_setCursor
-                  0x00038c                  _lcd_shiftScreen
-                  0x00039c                  _lcd_cmd
-                  0x0003f0                  _lcd_cntrl
-                  0x00041c                  _lcd_init
-                  0x00047e                  _setup
-                  0x00049e                  _main
+                  0x0002dc                  _delay
+                  0x0002f8                  _lcd_printStr
+                  0x000366                  _lcd_printChar
+                  0x000374                  _lcd_setCursor
+                  0x000390                  _lcd_shiftScreen
+                  0x0003a0                  _lcd_cmd
+                  0x0003f4                  _lcd_cntrl
+                  0x000420                  _lcd_init
+                  0x000482                  _setup
+                  0x0004a2                  _main
 
 External Symbols in Program Memory (by name):
 
@@ -109,16 +109,16 @@ External Symbols in Program Memory (by name):
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0002d8                  _delay
-                  0x00039c                  _lcd_cmd
-                  0x0003f0                  _lcd_cntrl
-                  0x00041c                  _lcd_init
-                  0x000362                  _lcd_printChar
-                  0x0002f4                  _lcd_printStr
-                  0x000370                  _lcd_setCursor
-                  0x00038c                  _lcd_shiftScreen
-                  0x00049e                  _main
-                  0x00047e                  _setup
+                  0x0002dc                  _delay
+                  0x0003a0                  _lcd_cmd
+                  0x0003f4                  _lcd_cntrl
+                  0x000420                  _lcd_init
+                  0x000366                  _lcd_printChar
+                  0x0002f8                  _lcd_printStr
+                  0x000374                  _lcd_setCursor
+                  0x000390                  _lcd_shiftScreen
+                  0x0004a2                  _main
+                  0x000482                  _setup
 
 Memory Configuration
 
@@ -202,10 +202,10 @@ __CONFIG1
  .debug_abbrev    0x000000        0x10a build/default/production/biedn001_lab5_main_v001.o
  .debug_abbrev    0x00010a         0xf8 build/default/production/biedn001_lab5_lcdLib_v001.o
 
-.debug_line       0x000000        0x2a5
+.debug_line       0x000000        0x294
  *(.debug_line)
- .debug_line      0x000000        0x142 build/default/production/biedn001_lab5_main_v001.o
- .debug_line      0x000142        0x163 build/default/production/biedn001_lab5_lcdLib_v001.o
+ .debug_line      0x000000        0x131 build/default/production/biedn001_lab5_main_v001.o
+ .debug_line      0x000131        0x163 build/default/production/biedn001_lab5_lcdLib_v001.o
 
 .debug_frame      0x000000        0x140
  *(.debug_frame)
@@ -849,20 +849,20 @@ __c30_signature
 .config_IESO      0x00abfc          0x2
  .config_IESO     0x00abfc          0x2 build/default/production/biedn001_lab5_main_v001.o
 
-.const              0x82ce          0xa load address 0x0002ce  
- .const             0x82ce          0x8 build/default/production/biedn001_lab5_main_v001.o
- .const             0x82d6          0x2 build/default/production/biedn001_lab5_lcdLib_v001.o
+.const              0x82ce          0xe load address 0x0002ce  
+ .const             0x82ce          0xc build/default/production/biedn001_lab5_main_v001.o
+ .const             0x82da          0x2 build/default/production/biedn001_lab5_lcdLib_v001.o
 
-.text             0x0002d8        0x246
- .text            0x0002d8        0x1a6 build/default/production/biedn001_lab5_lcdLib_v001.o
-                  0x0002d8                  _delay
-                  0x0002f4                  _lcd_printStr
-                  0x000362                  _lcd_printChar
-                  0x000370                  _lcd_setCursor
-                  0x00038c                  _lcd_shiftScreen
-                  0x00039c                  _lcd_cmd
-                  0x0003f0                  _lcd_cntrl
-                  0x00041c                  _lcd_init
- .text            0x00047e         0xa0 build/default/production/biedn001_lab5_main_v001.o
-                  0x00047e                  _setup
-                  0x00049e                  _main
+.text             0x0002dc        0x208
+ .text            0x0002dc        0x1a6 build/default/production/biedn001_lab5_lcdLib_v001.o
+                  0x0002dc                  _delay
+                  0x0002f8                  _lcd_printStr
+                  0x000366                  _lcd_printChar
+                  0x000374                  _lcd_setCursor
+                  0x000390                  _lcd_shiftScreen
+                  0x0003a0                  _lcd_cmd
+                  0x0003f4                  _lcd_cntrl
+                  0x000420                  _lcd_init
+ .text            0x000482         0x62 build/default/production/biedn001_lab5_main_v001.o
+                  0x000482                  _setup
+                  0x0004a2                  _main

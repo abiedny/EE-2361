@@ -32,38 +32,21 @@ void setup(void) {
 int main(void) {
     setup();
     
+    lcd_setCursor(0,0);
+    lcd_printStr("'sup");
     lcd_setCursor(1,0);
-    lcd_printStr("Hello!");
-    
+    lcd_printStr("nerds");
+    lcd_shiftScreen(RIGHT);
+    delay(500);
+        
     while(1) {
         lcd_shiftScreen(RIGHT);
-        delay(1000);
+        delay(500);
         lcd_shiftScreen(RIGHT);
-        delay(1000);
-        lcd_shiftScreen(RIGHT);
-        delay(1000);
-        lcd_shiftScreen(RIGHT);
-        delay(1000);
-        lcd_shiftScreen(RIGHT);
-        delay(1000);
-        lcd_shiftScreen(RIGHT);
-        delay(1000);
-        lcd_shiftScreen(RIGHT);
-        delay(1000);
+        delay(500);
         lcd_shiftScreen(LEFT);
-        delay(1000);
+        delay(500);
         lcd_shiftScreen(LEFT);
-        delay(1000);
-        lcd_shiftScreen(LEFT);
-        delay(1000);
-        lcd_shiftScreen(LEFT);
-        delay(1000);
-        lcd_shiftScreen(LEFT);
-        delay(1000);
-        lcd_shiftScreen(LEFT);
-        delay(1000);
-        lcd_shiftScreen(LEFT);
-        delay(1000);
-        
+        delay(500);
     }
 }
