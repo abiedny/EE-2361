@@ -75,6 +75,15 @@ void initPushButton(void) {
     T2CONbits.TON = 1; //timer 2 enabled
 }
 
+void delay(unsigned int ms) {
+    int i;
+    for (i = 0; i < ms; i++) {
+        asm("repeat #15993");
+        asm("nop");
+    }
+    return;
+}
+
 void setup(void) {
     CLKDIVbits.RCDIV = 0; //clock setup thing
     AD1PCFG = 0x9fff; //sets all pins to digital I/O
@@ -87,18 +96,11 @@ void setup(void) {
 
 int main(void) {
     setup();
-    setServo(1.2);
+    setServo(1.5);\
     
-    unsigned long int time = 0;
     while(1) {
-        //so time is the time since the last timer reset, therefore time since last button press
-        time = (unsigned long int)((unsigned long int)TMR2 + (unsigned long int)overflow*PR2);
-        
-        if (state && (time > (unsigned long int)125000)) {
-            //reset after 2 seconds
-            state = 0;
-            setServo(1.2);
-        }
+        //asdkjnapsfn
     }
+    
     return 0;
 }

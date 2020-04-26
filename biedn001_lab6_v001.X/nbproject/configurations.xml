@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>biedn001_lab6_circularBuffer_v001.h</itemPath>
+      <itemPath>biedn001_lab5_lcdLib_v001.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -15,6 +16,7 @@
                    projectFiles="true">
       <itemPath>biedn001_lab6_main_v001.c</itemPath>
       <itemPath>biedn001_lab6_circularBuffer_v001.c</itemPath>
+      <itemPath>biedn001_lab5_lcdLib_v001.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

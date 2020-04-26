@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-    #define BUFFERSIZE 5
+    #define BUFFERSIZE 1024
     static int buffer[BUFFERSIZE];
     static int buffInd = 0;
     
